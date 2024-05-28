@@ -5,7 +5,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <h1>
     This Banking App
-    This Banking App
   </h1>
 );
 
