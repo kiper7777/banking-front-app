@@ -1,7 +1,7 @@
 export function Withdraw() {
     return (
         <>
-          This is Withdraw test
+          This is Withdraw 
         </>
     )
 }
