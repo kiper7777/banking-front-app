@@ -6,12 +6,14 @@ import {NewCustomer} from './new-customer/new-customer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path='/' element={<Dashboard />} />
-      <Route path='/create' element={<NewCustomer />} />
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Dashboard />} />
+        <Route path='/create' element={<NewCustomer />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 
   // <h1>
   //   This Banking App
