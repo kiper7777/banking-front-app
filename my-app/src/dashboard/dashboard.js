@@ -5,19 +5,19 @@ export function Dashboard() {
     return (
         <div className={styles.dashCont}>
           <div>
-            <input type='button' value='Create New Customer' />
+            Create New Customer
           </div>
           <div>
-            <input type='button' value='Deposit' />
+            Deposit
           </div>
           <div>
-            <input type='button' value='Withdraw' />
+            Withdraw
           </div>
           <div>
-            <input type='button' value='Transfer' />
+            Transfer
           </div>
           <div>
-            <input type='button' value='Balance' />
+            Balance
           </div>
         </div>
     )

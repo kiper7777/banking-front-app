@@ -8,6 +8,8 @@ import {Withdraw} from './withdraw/withdraw';
 import {Transfer} from './transfer/transfer';
 import {Balance} from './balance/balance';
 
+import './index.css'
+
 // function Dashboard() {
 //   return <h1>Dashboard</h1>;
 // }
