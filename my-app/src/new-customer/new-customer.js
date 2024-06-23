@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./new-customer.module.css";
+import { json } from "react-router-dom";
 
 export function NewCustomer() {
 
@@ -12,6 +13,16 @@ export function NewCustomer() {
 		const balance = e.target.balance.value
 
 		console.log(`Id ${acId} Name ${acNm} Bal ${balance}`)
+
+		fetch('http://localhost:5000/create', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({acId, acNm, balance})
+		}).then(res => res.json())
+		.then(json => console.log(json))
 	}
 
   return (

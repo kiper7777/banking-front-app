@@ -10,14 +10,6 @@ import {Balance} from './balance/balance';
 
 import './index.css';
 
-// function Dashboard() {
-//   return <h1>Dashboard</h1>;
-// }
-
-// function NewCustomer() {
-//   return <h1>New Customer</h1>;
-// }
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
