@@ -1,20 +1,28 @@
 import React from "react";
+import styles from "./new-customer.module.css";
 
 export function NewCustomer() {
-    return (
-      <>
-        <h1>Create New Customer</h1>
-        <form>
-          <div>
-            <input type='number' placeholder="Account Id"/>
-          </div>  
-          <div>
-            <input type='text' placeholder="Account Name"/>
-          </div>
-          <div>
-            <input type='number' placeholder="Balance"/>
-          </div>
-        </form>
-      </>  
-    )
+
+	const onNewCustomer = e => {
+		e.preventDefault()
+
+		console.log(e.target)
+		const acId = e.target.acId.value
+		const acNm = e.target.acNm.value
+		const balance = e.target.balance.value
+
+		console.log(`Id ${acId} Name ${acNm} Bal ${balance}`)
+	}
+
+  return (
+    <div className={styles.custCont}>
+      <h1>Create New Customer</h1>
+      <form onSubmit={onNewCustomer}>
+        <input type="number" placeholder="Account Id" name="acId"/>
+        <input type="text" placeholder="Account Name" name="acNm"/>
+        <input type="number" placeholder="Balance" name="balance"/>
+        <input type="submit" value="Create" />
+      </form>
+    </div>
+  );
 }

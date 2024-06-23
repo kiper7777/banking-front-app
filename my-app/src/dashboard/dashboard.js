@@ -1,10 +1,14 @@
 import React from "react";
 import styles from './dashboard.module.css';
+import { useNavigate } from "react-router-dom";
 
 export function Dashboard() {
+
+  const navigate = useNavigate()
+
     return (
         <div className={styles.dashCont}>
-          <div>
+          <div onClick={() => navigate('/new')}>
             New Customer
           </div>
           <div>
