@@ -5,7 +5,7 @@ export function Dashboard() {
     return (
         <div className={styles.dashCont}>
           <div>
-            Create New Customer
+            New Customer
           </div>
           <div>
             Deposit
