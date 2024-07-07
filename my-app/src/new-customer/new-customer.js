@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./new-customer.module.css";
-import { json } from "react-router-dom";
+// import { json } from "react-router-dom";
 
 export function NewCustomer() {
 
