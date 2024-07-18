@@ -1,21 +1,44 @@
-// const express = require('express');
-// const cors = require('cors');
+const express = require('express');
+const cors = require('cors');
+const { createNewAccount, deposit, withdraw, balance, transfer } = require('./handlers');
 
-// const app = express();
-// const PORT = process.env.PORT || 5000;
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-// // const {createNewAccount, deposit, withdraw, balance, transfer}
+// Middleware
+app.use(cors());
+app.use(express.json());
 
-// app.post('/create', express.json(), (req, res) => {
-//   createNewAccount(req.body, (msg) => {
-//     res.json({'sts' : 'success', msg})
-//   })
-// })
+// Routes
+app.post('/create', (req, res) => {
+  createNewAccount(req.body, (msg) => {
+    res.json({ 'sts': 'success', msg });
+  });
+});
 
-// // Middleware
-// app.use(cors());
-// app.use(express.json());
+app.put('/transfer', (req, res) => {
+  transfer(req.body, (msg) => {
+    res.json({ 'sts': 'success', msg });
+  });
+});
 
+app.post('/deposit', (req, res) => {
+  deposit(req.body, (msg) => {
+    res.json({ 'sts': 'success', msg });
+  });
+});
+
+app.post('/withdraw', (req, res) => {
+  withdraw(req.body, (msg) => {
+    res.json({ 'sts': 'success', msg });
+  });
+});
+
+app.post('/balance', (req, res) => {
+  balance(req.body, (msg) => {
+    res.json({ 'sts': 'success', msg });
+  });
+});
 
 // Sample route
 app.get('/', (req, res) => {
@@ -26,24 +49,3 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
-
-// this code will help you to create web app
-const {response} = require('express')
-const express = require('express');
-const app = express();
-const PORT = 5000
-
-const {createNewAccount, deposit, withdraw, balance, transfer}
-
-app.post('/create', express.json(), (req, res) => {
-  createNewAccount(req.body, (msg) => {
-    res.json({'sts' : 'success', msg})
-  })
-})
-
-app.put('/transfer', express.json(), (req, res) => {
-  transfer(req.body, msg => {
-    res.json({'sts' : 'success', msg})
-  })
-})
