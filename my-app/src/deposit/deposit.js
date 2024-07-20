@@ -4,13 +4,15 @@ export function Deposit() {
   const onDeposit = (e) => {
     e.preventDefault();
 
+    console.log(e.target)
+
     const acId = e.target.acId.value;
     const amount = e.target.amount.value;
 
     console.log(`Id ${acId} Amount ${amount}`);
 
     fetch('http://localhost:5000/deposit', {
-      method: 'POST',  // изменено с PUT на POST
+      method: 'POST',  
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
