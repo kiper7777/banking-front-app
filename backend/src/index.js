@@ -16,14 +16,14 @@ app.post('/create', (req, res) => {
   });
 });
 
-app.put('/transfer', (req, res) => {
-  transfer(req.body, (msg) => {
+app.post('/deposit', (req, res) => {
+  deposit(req.body, (msg) => {
     res.json({ 'sts': 'success', msg });
   });
 });
 
-app.post('/deposit', (req, res) => {
-  deposit(req.body, (msg) => {
+app.put('/transfer', (req, res) => {
+  transfer(req.body, (msg) => {
     res.json({ 'sts': 'success', msg });
   });
 });
