@@ -11,7 +11,7 @@ export function Dashboard() {
           <div onClick={() => navigate('/new')}>
             New Customer
           </div>
-          <div>
+          <div onClick={() => navigate('/deposit')}>
             Deposit
           </div>
           <div>
