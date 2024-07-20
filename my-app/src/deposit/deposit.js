@@ -2,7 +2,25 @@ import styles from './deposit.module.css'
 
 export function Deposit() {
 
-    const onDeposit = () => {}
+    const onDeposit = (e) => {
+      e.preventDefault()
+
+      console.log(e.target)
+      const acId = e.target.acId.value
+      const amount = e.target.amount.value
+
+      console.log(`Id ${acId} Amount ${amount}`)
+
+      fetch('http://localhost:5000/deposit', {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({acId, amount})
+      }).then(res => res.json())
+      .then(json => console.log(json))
+    }
 
     return (
       <div className={styles.depCont}>
