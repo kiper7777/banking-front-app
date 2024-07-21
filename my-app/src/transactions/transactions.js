@@ -1,13 +1,14 @@
+// src/transactions/transactions.js
 import React, { useEffect, useState } from 'react';
 import styles from './transactions.module.css';
 
 export function Transactions() {
-  const [transactions, setTransactions] = useState([]);
+  const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/transactions')
+    fetch('http://localhost:5000/accounts')
       .then(res => {
         if (!res.ok) {
           throw new Error('Network response was not ok');
@@ -15,7 +16,7 @@ export function Transactions() {
         return res.json();
       })
       .then(data => {
-        setTransactions(data.transactions);
+        setAccounts(data.accounts);
         setLoading(false);
       })
       .catch(error => {
@@ -35,28 +36,24 @@ export function Transactions() {
 
   return (
     <div className={styles.transCont}>
-      <h1>Transactions</h1>
-      {transactions.length === 0 ? (
-        <div>No transactions found</div>
+      <h1>Account Balances</h1>
+      {accounts.length === 0 ? (
+        <div>No accounts found</div>
       ) : (
         <table className={styles.transTable}>
           <thead>
             <tr>
-              <th>Type</th>
               <th>Account ID</th>
-              <th>To Account ID</th>
-              <th>Amount</th>
-              <th>Date</th>
+              <th>Account Name</th>
+              <th>Balance</th>
             </tr>
           </thead>
           <tbody>
-            {transactions.map((transaction, index) => (
+            {accounts.map((account, index) => (
               <tr key={index}>
-                <td>{transaction.type}</td>
-                <td>{transaction.accountId || transaction.fromAccountId}</td>
-                <td>{transaction.toAccountId || 'N/A'}</td>
-                <td>{transaction.amount}</td>
-                <td>{new Date(transaction.date).toLocaleString()}</td>
+                <td>{account.acId}</td>
+                <td>{account.acNm}</td>
+                <td>{account.balance}</td>
               </tr>
             ))}
           </tbody>

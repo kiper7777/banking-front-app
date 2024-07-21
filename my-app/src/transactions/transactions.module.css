@@ -1,18 +1,19 @@
+/* src/transactions/transactions.module.css */
 .transCont {
-    padding: 20px;
-  }
-  
-  .transTable {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .transTable th, .transTable td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .transTable th {
-    background-color: #f2f2f2;
-  }
-  
+  padding: 20px;
+}
+
+.transTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transTable th,
+.transTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.transTable th {
+  background-color: #f2f2f2;
+}

@@ -1,6 +1,6 @@
+// src/index.js
 const express = require('express');
 const cors = require('cors');
-const { createNewAccount, deposit, withdraw, balance, transfer, getTransactions } = require('./handlers');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -8,40 +8,15 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-app.post('/create', (req, res) => {
-  createNewAccount(req.body, (msg) => {
-    res.json({ 'sts': 'success', msg });
-  });
-});
+// Mock data (replace with real data in your case)
+const accounts = [
+  { acId: '123', acNm: 'John Doe', balance: 1000 },
+  { acId: '124', acNm: 'Jane Smith', balance: 2000 },
+  { acId: '125', acNm: 'Mike Johnson', balance: 1500 }
+];
 
-app.post('/deposit', (req, res) => {
-  deposit(req.body, (msg) => {
-    res.json({ 'sts': 'success', msg });
-  });
-});
-
-app.put('/transfer', (req, res) => {
-  transfer(req.body, (msg) => {
-    res.json({ 'sts': 'success', msg });
-  });
-});
-
-app.post('/withdraw', (req, res) => {
-  withdraw(req.body, (msg) => {
-    res.json({ 'sts': 'success', msg });
-  });
-});
-
-app.post('/balance', (req, res) => {
-  balance(req.body, (msg) => {
-    res.json({ 'sts': 'success', msg });
-  });
-});
-
-app.get('/transactions', (req, res) => {
-  getTransactions((transactions) => {
-    res.json({ 'sts': 'success', transactions });
-  });
+app.get('/accounts', (req, res) => {
+  res.json({ accounts });
 });
 
 app.get('/', (req, res) => {
