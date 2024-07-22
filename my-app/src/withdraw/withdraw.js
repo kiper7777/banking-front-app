@@ -1,8 +1,12 @@
 // src/withdraw/withdraw.js
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './withdraw.module.css';
 
 export function Withdraw({ onAccountUpdate }) {
+  useEffect(() => {
+    console.log('Withdraw component mounted');
+    console.log('onAccountUpdate:', onAccountUpdate);
+  }, [onAccountUpdate]);
 
   const onWithdraw = (e) => {
     e.preventDefault();
@@ -20,13 +24,17 @@ export function Withdraw({ onAccountUpdate }) {
     })
     .then(res => {
       if (!res.ok) {
-        return res.json().then(error => { throw new Error(error.error) });
+        return res.json().then(error => { throw new Error(error.msg) });
       }
       return res.json();
     })
     .then(json => {
       console.log('Withdraw successful:', json);
-      onAccountUpdate(json.account); // Update account information
+      if (typeof onAccountUpdate === 'function') {
+        onAccountUpdate(json.account); // Update account information
+      } else {
+        console.error('onAccountUpdate is not provided');
+      }
     })
     .catch(error => {
       console.error('Error during withdraw:', error.message);
@@ -34,15 +42,13 @@ export function Withdraw({ onAccountUpdate }) {
   }
 
   return (
-    <>
-      <div className={styles.withdrawCont}>
-        <h1>Withdraw Amount</h1>
-        <form onSubmit={onWithdraw}>
-          <input type="text" placeholder="Account Id" name="acId" />
-          <input type="number" placeholder="Amount" name="amount" />
-          <input type="submit" value="Withdraw" />
-        </form>
-      </div>
-    </>
+    <div className={styles.withdrawCont}>
+      <h1>Withdraw Amount</h1>
+      <form onSubmit={onWithdraw}>
+        <input type="text" placeholder="Account Id" name="acId" />
+        <input type="number" placeholder="Amount" name="amount" />
+        <input type="submit" value="Withdraw" />
+      </form>
+    </div>
   );
 }

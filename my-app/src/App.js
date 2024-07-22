@@ -10,6 +10,7 @@ const App = () => {
   const [updatedAccount, setUpdatedAccount] = useState(null);
 
   const handleAccountUpdate = (account) => {
+    console.log('Account updated:', account);
     setUpdatedAccount(account);
   };
 
