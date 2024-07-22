@@ -34,7 +34,7 @@ export function NewCustomer() {
   };
 
   return (
-    <div className={styles.newCustCont}>
+    <div className={styles.custCont}>
       <h1>Create New Account</h1>
       <form onSubmit={onCreateAccount}>
         <input
