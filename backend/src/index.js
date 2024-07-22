@@ -46,6 +46,28 @@ app.put('/deposit', (req, res) => {
   res.json({ status: 'success', account });
 });
 
+// Route to withdraw amount
+app.put('/withdraw', (req, res) => {
+  const { acId, amount } = req.body;
+
+  if (!acId || amount === undefined) {
+    return res.status(400).json({ error: 'All fields are required: acId, amount' });
+  }
+
+  const account = accounts.find(account => account.acId === acId);
+
+  if (!account) {
+    return res.status(404).json({ error: 'Account not found' });
+  }
+
+  if (account.balance < Number(amount)) {
+    return res.status(400).json({ error: 'Insufficient balance' });
+  }
+
+  account.balance -= Number(amount);
+  res.json({ status: 'success', account });
+});
+
 // Route to get all accounts
 app.get('/accounts', (req, res) => {
   res.json(accounts);

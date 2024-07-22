@@ -14,7 +14,7 @@ export function Dashboard() {
           <div onClick={() => navigate('/deposit')}>
             Deposit
           </div>
-          <div>
+          <div onClick={() => navigate('/withdraw')}>
             Withdraw
           </div>
           <div>
