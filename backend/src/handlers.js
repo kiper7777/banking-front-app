@@ -11,16 +11,16 @@ function createNewAccount(data, callback) {
   callback(`Account created for ${name} with ID ${accountId}`);
 }
 
-function deposit(data, callback) {
-  const { accountId, amount } = data;
-  if (accounts[accountId]) {
-    accounts[accountId].balance += amount;
-    transactions.push({ type: 'deposit', accountId, amount, date: new Date() });
-    callback(`Deposited $${amount} to account ID ${accountId}`);
-  } else {
-    callback(`Account ID ${accountId} not found`);
-  }
-}
+// function deposit(data, callback) {
+//   const { accountId, amount } = data;
+//   if (accounts[accountId]) {
+//     accounts[accountId].balance += amount;
+//     transactions.push({ type: 'deposit', accountId, amount, date: new Date() });
+//     callback(`Deposited $${amount} to account ID ${accountId}`);
+//   } else {
+//     callback(`Account ID ${accountId} not found`);
+//   }
+// }
 
 function withdraw(data, callback) {
   const { accountId, amount } = data;
