@@ -5,6 +5,7 @@ import { Dashboard } from './dashboard/dashboard';
 import { NewCustomer } from './new-customer/new-customer';
 import { Transactions } from './transactions/transactions';
 import { Withdraw } from './withdraw/withdraw';
+import { Transfer } from './transfer/transfer';
 
 const App = () => {
   const [updatedAccount, setUpdatedAccount] = useState(null);
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/create' element={<NewCustomer />} />
         <Route path='/transactions' element={<Transactions updatedAccount={updatedAccount} />} />
         <Route path='/withdraw' element={<Withdraw onAccountUpdate={handleAccountUpdate} />} />
+        <Route path='/transfer' element={<Transfer onAccountUpdate={handleAccountUpdate} />} />
       </Routes>
     </BrowserRouter>
   );

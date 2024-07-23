@@ -46,6 +46,13 @@ app.put('/deposit', (req, res) => {
   res.json({ status: 'success', account });
 });
 
+// Route to transfer amount
+app.put('/transfer', express.json(), (req, res) => {
+  transfer(req.body, msg => {
+    res.json({'sts' : 'success', msg})
+  })
+})
+
 // Route to withdraw amount
 app.put('/withdraw', (req, res) => {
   const { acId, amount } = req.body;
