@@ -14,11 +14,22 @@ export function Transactions({ updatedAccount }) {
 
   useEffect(() => {
     if (updatedAccount) {
-      setAccounts(prevAccounts => 
-        prevAccounts.map(account =>
-          account.acId === updatedAccount.acId ? updatedAccount : account
-        )
-      );
+      setAccounts((prevAccounts) => {
+        const newAccounts = [...prevAccounts];
+        if (updatedAccount.fromAccount) {
+          const fromIndex = newAccounts.findIndex(acc => acc.acId === updatedAccount.fromAccount.acId);
+          if (fromIndex !== -1) {
+            newAccounts[fromIndex] = updatedAccount.fromAccount;
+          }
+        }
+        if (updatedAccount.toAccount) {
+          const toIndex = newAccounts.findIndex(acc => acc.acId === updatedAccount.toAccount.acId);
+          if (toIndex !== -1) {
+            newAccounts[toIndex] = updatedAccount.toAccount;
+          }
+        }
+        return newAccounts;
+      });
     }
   }, [updatedAccount]);
 
