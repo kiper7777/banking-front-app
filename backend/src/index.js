@@ -46,12 +46,23 @@ app.put('/deposit', (req, res) => {
   res.json({ status: 'success', account });
 });
 
-// Route to transfer amount
-app.put('/transfer', express.json(), (req, res) => {
-  transfer(req.body, msg => {
-    res.json({'sts' : 'success', msg})
-  })
-})
+// Route to handle transfer
+app.put('/transfer', (req, res) => {
+  const { fromAcId, toAcId, amount } = req.body;
+  const fromAccount = accounts.find(acc => acc.acId === fromAcId);
+  const toAccount = accounts.find(acc => acc.acId === toAcId);
+  if (fromAccount && toAccount) {
+    if (fromAccount.balance >= amount) {
+      fromAccount.balance -= Number(amount);
+      toAccount.balance += Number(amount);
+      res.json({ sts: 'success', msg: 'Transfer successful', fromAccount, toAccount });
+    } else {
+      res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
+    }
+  } else {
+    res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
+  }
+});
 
 // Route to withdraw amount
 app.put('/withdraw', (req, res) => {
