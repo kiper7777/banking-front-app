@@ -20,7 +20,7 @@ export function Dashboard() {
           <div onClick={() => navigate('/transfer')}>
             Transfer
           </div>
-          <div>
+          <div onClick={() => navigate('/balance')}>
             Balance
           </div>
         </div>

@@ -10,6 +10,8 @@ export function Transfer({ onAccountUpdate }) {
     const toAcId = e.target.toAcId.value;
     const amount = e.target.amount.value;
 
+    console.log(`From account ID ${fromAcId} To account ID ${toAcId} Amount ${amount}`)
+
     fetch('http://localhost:5000/transfer', {
       method: 'PUT',
       headers: {
@@ -41,8 +43,8 @@ export function Transfer({ onAccountUpdate }) {
     <div className={styles.transferCont}>
       <h1>Transfer Amount</h1>
       <form onSubmit={onTransfer}>
-        <input type="text" placeholder="From Account Id" name="fromAcId" />
-        <input type="text" placeholder="To Account Id" name="toAcId" />
+        <input type="number" placeholder="From Account Id" name="fromAcId" />
+        <input type="number" placeholder="To Account Id" name="toAcId" />
         <input type="number" placeholder="Amount" name="amount" />
         <input type="submit" value="Transfer" />
       </form>
