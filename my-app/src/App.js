@@ -1,3 +1,4 @@
+// src/index.js
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -10,9 +11,9 @@ import { Transfer } from './transfer/transfer';
 const App = () => {
   const [updatedAccount, setUpdatedAccount] = useState(null);
 
-  const handleAccountUpdate = (account) => {
-    console.log('Account updated:', account);
-    setUpdatedAccount(account);
+  const handleAccountUpdate = (fromAccount, toAccount) => {
+    console.log('Accounts updated:', fromAccount, toAccount);
+    setUpdatedAccount({ fromAccount, toAccount });
   };
 
   return (
