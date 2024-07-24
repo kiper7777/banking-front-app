@@ -86,6 +86,19 @@ app.put('/withdraw', (req, res) => {
   res.json({ status: 'success', account });
 });
 
+// Route to get balance for a specific account
+app.get('/balance/:acId', (req, res) => {
+  const { acId } = req.params;
+  const account = accounts.find(account => account.acId === parseInt(acId));
+
+  if (!account) {
+    return res.status(404).json({ error: 'Account not found' });
+  }
+
+  res.json({ balance: account.balance });
+});
+
+
 // Route to get all accounts
 app.get('/accounts', (req, res) => {
   res.json(accounts);
