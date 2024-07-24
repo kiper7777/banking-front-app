@@ -49,8 +49,10 @@ app.put('/deposit', (req, res) => {
 // Route to handle transfer
 app.put('/transfer', (req, res) => {
   const { fromAcId, toAcId, amount } = req.body;
+
   const fromAccount = accounts.find(acc => acc.acId === fromAcId);
   const toAccount = accounts.find(acc => acc.acId === toAcId);
+  
   if (fromAccount && toAccount) {
     if (fromAccount.balance >= amount) {
       fromAccount.balance -= Number(amount);
@@ -60,6 +62,9 @@ app.put('/transfer', (req, res) => {
     if (fromAccount.balance < amount) {
       res.json({ sts: 'failure', msg: 'Insufficient balance in source account' });
     } 
+    if (!fromAccount && !toAccount) {
+      res.json({ sts: 'failure', msg: 'One or both accounts not found' });
+    }
     
   //   else {
   //     res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
@@ -67,9 +72,7 @@ app.put('/transfer', (req, res) => {
   // } else {
   //   res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
   }
-  if (!fromAccount && !toAccount) {
-    res.json({ sts: 'failure', msg: 'One or both accounts not found' });
-  }
+  
 });
 
 // Route to withdraw amount
