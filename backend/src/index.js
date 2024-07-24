@@ -56,11 +56,19 @@ app.put('/transfer', (req, res) => {
       fromAccount.balance -= Number(amount);
       toAccount.balance += Number(amount);
       res.json({ sts: 'success', msg: 'Transfer successful', fromAccount, toAccount });
-    } else {
-      res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
-    }
-  } else {
-    res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
+    } 
+    if (fromAccount.balance < amount) {
+      res.json({ sts: 'failure', msg: 'Insufficient balance in source account' });
+    } 
+    
+  //   else {
+  //     res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
+  //   }
+  // } else {
+  //   res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
+  }
+  if (!fromAccount && !toAccount) {
+    res.json({ sts: 'failure', msg: 'One or both accounts not found' });
   }
 });
 

@@ -7,6 +7,7 @@ import { NewCustomer } from './new-customer/new-customer';
 import { Transactions } from './transactions/transactions';
 import { Withdraw } from './withdraw/withdraw';
 import { Transfer } from './transfer/transfer';
+import { Balance } from './balance/balance';
 
 const App = () => {
   const [updatedAccount, setUpdatedAccount] = useState(null);
@@ -24,6 +25,7 @@ const App = () => {
         <Route path='/transactions' element={<Transactions updatedAccount={updatedAccount} />} />
         <Route path='/withdraw' element={<Withdraw onAccountUpdate={handleAccountUpdate} />} />
         <Route path='/transfer' element={<Transfer onAccountUpdate={handleAccountUpdate} />} />
+        <Route path='/balance' element={<Balance />} />
       </Routes>
     </BrowserRouter>
   );

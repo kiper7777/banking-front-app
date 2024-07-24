@@ -27,7 +27,7 @@ export function Transfer({ onAccountUpdate }) {
       return res.json();
     })
     .then(json => {
-      console.log('Transfer successful:', json);
+      console.log('Transfer:', json);
       if (typeof onAccountUpdate === 'function') {
         onAccountUpdate(json.fromAccount, json.toAccount); // Update account information
       } else {

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from './balance.module.css';
-import { json } from "react-router-dom";
 
 export function Balance() {
 
@@ -14,16 +13,22 @@ export function Balance() {
     console.log(`Id ${acId}`)
 
     fetch(`http://localhost:5000/balance/${acId}`)
-    .then(res => res.json())
-    .then(json => setBalance(json.balance))
-  }
+      .then(res => {
+        if (!res.ok) {
+          throw new Error('Account not found');
+        }
+        return res.json();
+      })
+      .then(data => setBalance(data.balance))
+      .catch(error => console.error('Error fetching balance:', error));
+  };
 
   return (
     <div className={styles.balanceCont}>
       <h1>Balance is : INR. {balance}</h1>
       <form onSubmit={onBalance}>
         <input type="number" placeholder="Account Id" name="acId" />
-        <input type="submit" value="Balance" />
+        <input type="submit" value="Check Balance" />
       </form>
     </div>
   );
