@@ -53,6 +53,8 @@ export function Transfer({ onAccountUpdate }) {
       </form>
       {status && <p style={{ color: 'green' }}>{status}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
+
+      {message && <p>{message}</p>}
     </div>
   );
 }
