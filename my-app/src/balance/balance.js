@@ -2,15 +2,15 @@ import { useState } from "react";
 import styles from './balance.module.css';
 
 export function Balance() {
-
-  const [balance, setBalance] = useState(0)
+  const [balance, setBalance] = useState(0);
+  const [error, setError] = useState('');
 
   const onBalance = (e) => {
     e.preventDefault();
 
     const acId = e.target.acId.value;
     
-    console.log(`Id ${acId}`)
+    console.log(`Id ${acId}`);
 
     fetch(`http://localhost:5000/balance/${acId}`)
       .then(res => {
@@ -19,8 +19,14 @@ export function Balance() {
         }
         return res.json();
       })
-      .then(data => setBalance(data.balance))
-      .catch(error => console.error('Error fetching balance:', error));
+      .then(data => {
+        setBalance(data.balance);
+        setError('');
+      })
+      .catch(error => {
+        console.error('Error fetching balance:', error);
+        setError(error.message);
+      });
   };
 
   return (
@@ -30,6 +36,7 @@ export function Balance() {
         <input type="number" placeholder="Account Id" name="acId" />
         <input type="submit" value="Check Balance" />
       </form>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
     </div>
   );
 }

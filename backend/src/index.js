@@ -50,35 +50,20 @@ app.put('/deposit', (req, res) => {
 app.put('/transfer', (req, res) => {
   const { fromAcId, toAcId, amount } = req.body;
 
-// Найти аккаунты отправителя и получателя
   const fromAccount = accounts.find(acc => acc.acId === fromAcId);
   const toAccount = accounts.find(acc => acc.acId === toAcId);
 
-// Проверка на существование аккаунтов
   if (!fromAccount || !toAccount) {
     return res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
   }
-  
-  if (fromAccount && toAccount) {
-    if (fromAccount.balance >= amount) {
-      fromAccount.balance -= Number(amount);
-      toAccount.balance += Number(amount);
-      res.json({ sts: 'success', msg: 'Transfer successful', fromAccount, toAccount });
-    } 
-    if (fromAccount.balance < amount) {
-      res.json({ sts: 'failure', msg: 'Insufficient balance in source account' });
-    } 
-    if (!fromAccount && !toAccount) {
-      res.json({ sts: 'failure', msg: 'One or both accounts not found' });
-    }
-    
-  //   else {
-  //     res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
-  //   }
-  // } else {
-  //   res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
+
+  if (fromAccount.balance < amount) {
+    return res.status(400).json({ sts: 'failure', msg: 'Insufficient balance in source account' });
   }
-  
+
+  fromAccount.balance -= Number(amount);
+  toAccount.balance += Number(amount);
+  res.json({ sts: 'success', msg: 'Transfer successful', fromAccount, toAccount });
 });
 
 // Route to withdraw amount
@@ -106,7 +91,7 @@ app.put('/withdraw', (req, res) => {
 // Route to get balance for a specific account
 app.get('/balance/:acId', (req, res) => {
   const { acId } = req.params;
-  const account = accounts.find(account => account.acId === parseInt(acId));
+  const account = accounts.find(account => account.acId === acId);
 
   if (!account) {
     return res.status(404).json({ error: 'Account not found' });
@@ -114,7 +99,6 @@ app.get('/balance/:acId', (req, res) => {
 
   res.json({ balance: account.balance });
 });
-
 
 // Route to get all accounts
 app.get('/accounts', (req, res) => {
