@@ -4,6 +4,7 @@ import styles from './transfer.module.css';
 export function Transfer({ onAccountUpdate }) {
   const [status, setStatus] = useState('');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
   const onTransfer = (e) => {
     e.preventDefault();
@@ -22,6 +23,7 @@ export function Transfer({ onAccountUpdate }) {
       .then(res => res.json())
       .then(json => {
         if (json.sts === 'success') {
+          setMessage('Transfer successfull');
           setStatus(json.msg);
           setError('');
           // Если onAccountUpdate не передан, не выполняем его
