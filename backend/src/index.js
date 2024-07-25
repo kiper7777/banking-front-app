@@ -50,8 +50,14 @@ app.put('/deposit', (req, res) => {
 app.put('/transfer', (req, res) => {
   const { fromAcId, toAcId, amount } = req.body;
 
+// Найти аккаунты отправителя и получателя
   const fromAccount = accounts.find(acc => acc.acId === fromAcId);
   const toAccount = accounts.find(acc => acc.acId === toAcId);
+
+// Проверка на существование аккаунтов
+  if (!fromAccount || !toAccount) {
+    return res.status(404).json({ sts: 'failure', msg: 'One or both accounts not found' });
+  }
   
   if (fromAccount && toAccount) {
     if (fromAccount.balance >= amount) {
